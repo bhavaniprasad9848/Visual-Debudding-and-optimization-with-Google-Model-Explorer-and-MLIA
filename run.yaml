@@ -1,0 +1,20 @@
+version: '1.0'
+steps:
+- graph_optimize: null
+- graph_quantize:
+  - scheme: W8-A8
+    automatic_mixed_precision: null
+profile:
+- INPUT_MODEL
+- GRAPH_OPTIMIZE
+- OUTPUT_MODEL
+evaluate:
+- model: INPUT_MODEL
+  metric:
+  - TOP1_ACCURACY
+- model: GRAPH_OPTIMIZE
+  metric:
+  - TOP1_ACCURACY
+- model: OUTPUT_MODEL
+  metric:
+  - TOP1_ACCURACY
